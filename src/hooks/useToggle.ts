@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import useLatest from "./useLatest";
-import isUndefined from "../util/isUndefined";
 
 type Action<T = boolean, U = boolean> = {
   set(v: T | U): boolean

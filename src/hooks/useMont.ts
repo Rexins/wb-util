@@ -1,5 +1,5 @@
-import warning from "../util/warning";
-import isFunction from "../util/isFunction";
+import warning from "../utils/warning";
+import isFunction from "../utils/isFunction";
 import { useEffect } from "react";
 
 export default function useMount(fn: Function) {
