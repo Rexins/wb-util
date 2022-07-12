@@ -1,9 +1,9 @@
 import { act, renderHook } from "@testing-library/react";
 import useToggle from "../useToggle";
 
-const setToggle = (leftValue?: unknown, rightValue?: unknown) =>
-  renderHook((state) => useToggle(state.leftValue, state.rightValue), {
-    initialProps: { leftValue, rightValue },
+const setToggle = (leftValue?: unknown, rightValue?: unknown, defaultValue?: unknown ) =>
+  renderHook((state) => useToggle(state.leftValue, state.rightValue, state.defaultValue), {
+    initialProps: { leftValue, rightValue, defaultValue },
   });
 const getCurState = (v) => v.current[0];
 
@@ -23,8 +23,13 @@ describe("useToggle", () => {
     testFlow(result, leftVal, rightVal);
     leftVal = "leftVal";
     rightVal = "rightVal";
-    rerender({ leftValue: leftVal, rightValue: rightVal });
+    rerender({ leftValue: leftVal, rightValue: rightVal, defaultValue: void 0 });
     testFlow(result, leftVal, rightVal);
+
+    ({ result, rerender } = setToggle(leftVal, rightVal, rightVal));
+    expect(getCurState(result)).toEqual(rightVal)
+    rerender({ leftValue: leftVal, rightValue: rightVal, defaultValue: 'adfs' })
+    expect(getCurState(result)).toEqual(rightVal)
   });
 
   function testFlow(
