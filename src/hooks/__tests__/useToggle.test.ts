@@ -50,6 +50,10 @@ describe("useToggle", () => {
     });
     expect(getCurState(result)).toEqual(LEFT_VAL);
     act(() => {
+      result.current[1].set('Hello World!');
+    })
+    expect(getCurState(result)).toEqual(LEFT_VAL);
+    act(() => {
       result.current[1].set(RIGHT_VAL);
     });
     expect(getCurState(result)).toEqual(RIGHT_VAL);
